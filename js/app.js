@@ -1,5 +1,5 @@
-//const gameModel = require('./models/responses');
-//const gameView = require('./views/guesses');
+const gameModel = require('./models/responses');
+const gameView = require('./views/guesses');
 
 window.addEventListener('load', () => {
 	let response = new gameModel();

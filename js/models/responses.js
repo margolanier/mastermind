@@ -6,7 +6,7 @@ module.exports = Backbone.Model.extend({
 		// want to show that the rounds are empty until the response/round happens
 	},
 	
-	getFeedback: {
+	getFeedback() {
 		console.log('getting feedback');
 		// test data for now
 		this.set('round', [1, 1, 1, 1]);

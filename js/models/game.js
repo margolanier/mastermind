@@ -4,7 +4,7 @@ module.exports = Backbone.Model.extend({
 	defaults: {
 		round: 0, // chats api = 'from'
         guesses: [],
-		responses: '' // chats api = 'message'
+		responses: [] // chats api = 'message'
     },
 	
 	Guess(guess) {
@@ -15,11 +15,15 @@ module.exports = Backbone.Model.extend({
 		return this;
 	},
 	
-	checkGuess(feedback) {
-		console.log('checking');
-		console.log(feedback);
-		//this.set('round', feedback.from);
-		//this.set('responses', feedback.message);
+	checkGuess(round, guess, response) {
+		console.log('check guess');
+		
+		this.set('round', round);
+		this.set('guesses', guesses.push(guess));
+		this.set('responses', responses.push(response));
+		
+		console.log(round, guess, response);
+		console.log(this.defaults);
 		
 		// manually trigger view re-render
 		this.trigger('change');

@@ -26,10 +26,12 @@ Backbone.sync = function(method, model) {
         req.open('GET', 'http://api.queencityiron.com/chats');
         req.addEventListener('load', function () {
             const response = JSON.parse(req.responseText);
-			const feedback = response.chats[0];
-			console.log(feedback);
 			
-			//model.checkGuess(feedback);
+			const answer = response.chats[0];
+			console.log(answer);
+			
+			// Add answer ('round 0') to array
+			//model.checkGuess(answer.from, answer.message, answer.message);
 			
         });
         req.send();
@@ -45,8 +47,11 @@ Backbone.sync = function(method, model) {
 			console.log('posting');
 			console.log(feedback);
 			
-			model.checkGuess(feedback);
-			//model.checkGuess(response.round, response.guesses);
+			// Only need to check the lastest round
+			// (last object in array)
+			let latest = feedback.length - 1;
+			model.checkGuess(latest.from, latest.message, latest.message);
+			//model.checkGuess(latest.round, latest.guess, latest.response);
         });
 		
         req.send();

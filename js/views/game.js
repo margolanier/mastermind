@@ -1,26 +1,32 @@
 module.exports = Backbone.View.extend({
 	
-	initialize() { // what happens on init
+	initialize() {
 		this.model.on('change', this.render, this);
 	},
 	
-	events: { // event listeners
+	events: {
 		'click #guess' : 'makeGuess',
 	},
 	
-	makeGuess() { // event handler
-		console.log('make Guess');
+	makeGuess() {
+		console.log('make new guess');
 		
-		//const guesses = this.model.get('guesses');
-		//console.log(guesses);
-    	//guesses.push(new Guess(guess));
+		const guesses = this.model.get('guesses');
+		console.log(guesses);
 		
-		let guess = [1, 2, 3, 4];
-		//guesses.push(new Guess(guess));
+		// Get user input and send new guess to server
+		let input = JSON.stringify({
+			from: 'margo', // round: 1,
+			message: 'it works. cool.' // guesses: []
+		});
+		let guess = new this.model.Guess(input);
 		
-		//guesses.push(['hello']);
-
-    	this.model.save(); // game.save()
+		// Add guess to guesses array
+    	guesses.push(guess);
+		
+		// Send guess to server
+		this.model.save();
+		//guess.save();
 	},
 	
 	render() {

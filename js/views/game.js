@@ -1,6 +1,7 @@
 module.exports = Backbone.View.extend({
 	
 	initialize() {
+		this.render();
 		this.model.on('change', this.render, this);
 	},
 	
@@ -24,11 +25,11 @@ module.exports = Backbone.View.extend({
 		
 		// trying to call the Guess() contructor in models/game.js
 		// doesn't work though
-		let Guess = this.model.Guess();
-		let guess = new Guess(input);
+		//let Guess = this.model.Guess();
+		//let guess = new Guess(input);
 		
 		// Add guess to guesses array
-    	guesses.push(guess);
+    	//guesses.push(guess);
 		
 		/*
 		// or just manually push the input/guess to guesses[]
@@ -39,16 +40,16 @@ module.exports = Backbone.View.extend({
 		*/
 		
 		// Send guess to server
-		//this.model.save();
+		this.model.save();
 		/* do i save the model (above) or the new 'guess' (below) ?
 		i was thinking this is where you send the body like an ajax req.send(body), so the save should be on 'guess'
 		*/
-		guess.save();
+		//guess.save();
 	},
 	
 	render() {
 		console.log('rendering');
-		let list = this.el.querySelector('#gameboard');
+		
 		let fakeResponse = [
 			{
 				"round": 0,
@@ -66,6 +67,7 @@ module.exports = Backbone.View.extend({
 				"response": [2, 0, 2, 0],
 			},
 		];
+		let round = 3;
 		let fake_guesses = [
 			[1, 2, 3, 4],
 			[4, 6, 3, 6],
@@ -77,16 +79,9 @@ module.exports = Backbone.View.extend({
 			[1, 7, 3, 5],
 		];
 		
-		// First element in array contains the correct combo
-		fake_guesses.forEach(function(guess) {
-			console.log('G');
-			//mustache.render();
-		});
 		fake_responses.forEach(function(response) {
 			console.log('R');
-			//mustache.render();
 		});
-		
 		
 		/*let button = this.el.querySelector('#more-peas');
 		button.textContent = this.model.get('peas');*/

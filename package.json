@@ -1,0 +1,29 @@
+{
+  "name": "mastermind",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "browser": "^0.2.6",
+    "foundation-sites": "^6.3.0",
+    "gulp": "^3.9.1",
+    "gulp-browser": "^3.0.4",
+    "gulp-sass": "^3.0.0",
+    "gulp-watch": "^4.3.11",
+    "spectrum-colorpicker": "^1.8.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/margolanier/mastermind.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/margolanier/mastermind/issues"
+  },
+  "homepage": "https://github.com/margolanier/mastermind#readme"
+}

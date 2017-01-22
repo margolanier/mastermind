@@ -10,28 +10,75 @@ $green: #9BC53D;
 $blue: #65DEF1;
 $purple: #F78CFF;
 $black: #242424;
-$white: #FCF9FF;
-
+$white: #FFFFFF;
 $board-color: #B4B4B4;
+
+h1 {
+	text-align: center;
+}
 
 #gameboard {
 	background-color: $board-color;
+	width: 100%;
+	max-width: 500px;
+	margin: auto;
 }
 
-#sortable {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	width: 450px;
+#rounds {
+	@include grid-row();
+	padding: 0 20px !important;
+	
+	li {
+		height: 60px;
+		margin: 10px 0;
+		border-bottom: 1px solid red;
+		list-style: none;
+		
+		.guess {
+			@include grid-column(9);
+			display: flex;
+			padding-left: 0;
+
+			input, div {
+				width: 50px;
+				height: 50px;
+				border: 1px solid $black;
+				border-radius: 50%;
+				background-color: $white;
+				margin: 0 10px;
+				text-align: center;
+				line-height: 50px;
+			}
+		}
+
+		.response {
+			@include grid-column(3);
+			width: 50px;
+			height: 50px;
+			padding: 0 !important;
+
+			div {
+				display: inline-block;
+				background-color: $white;
+				border: 1px solid $black;
+				width: 20px;
+				height: 20px;
+				border-radius: 50%;
+			}
+		}
+	}
 }
 
-#sortable li {
-	margin: 3px 3px 3px 0;
-	padding: 1px;
-	float: left;
-	width: 100px;
-	height: 90px;
-	font-size: 4em;
-	text-align: center;
+.sp-palette {
+	max-width: 200px;
+}
+
+.label {
+    background: #444;
+    padding:8px;    
+    border-radius: 4px;
+    color: #eee;
+    margin-top: 10px;
+    display:inline-block;
 }
 

@@ -2,9 +2,12 @@
 <html>
 	<head>
 		<title>Mastermind</title>
-		<meta charset="UTF-8"> 
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="style.css">
+		
 		<script src="http://underscorejs.org/underscore.js"></script>
 		<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 		<script src="http://backbonejs.org/backbone.js"></script>
 		<script src="app.js"></script>
 		
@@ -12,9 +15,66 @@
 	
 	<body>
 		<h1>Mastermind</h1>
-		<ul id="gameboard">
-			<li>Round</li>
+		
+		<input type='color' id="showPaletteOnly"/>
+		<span class='label'>Choose a color</span>
+		
+		<div id="gameboard">
+			
+			<ul id="rounds">
+				<li class="answer">
+					<div class="guess">
+						<div>?</div>
+						<div>?</div>
+						<div>?</div>
+						<div>?</div>
+					</div>
+				</li>
+				
+				<li class="round3">
+					<div class="guess">
+						<input type="color" class="">
+						<input type="color" class="">
+						<input type="color" class="">
+						<input type="color" class="">
+					</div>
+					<div class="response">
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+					</div>
+				</li>
+				<li class="round2">
+					<div class="guess">
+						<input type="color" class="">
+						<input type="color" class="">
+						<input type="color" class="">
+						<input type="color" class="">
+					</div>
+					<div class="response">
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+					</div>
+				</li>
+				<li class="round1">
+					<div class="guess">
+						<input type="color" class="">
+						<input type="color" class="">
+						<input type="color" class="">
+						<input type="color" class="">
+					</div>
+					<div class="response">
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+					</div>
+				</li>
+			</ul>
 			<button id="guess">Guess</button>
-		</ul>
+		</div>
 	</body>
 </html>

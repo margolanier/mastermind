@@ -7,6 +7,11 @@ module.exports = Backbone.Model.extend({
 		responses: [] // chats api = 'message'
     },
 	
+	reset() {
+		this.set('turns', 0);
+		this.save();
+	},
+	
 	Guess(guess) {
 		this.guess = guess;
 		this.exact = null; // right color, right position

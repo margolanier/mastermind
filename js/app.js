@@ -33,8 +33,12 @@ Backbone.sync = function (method, model) {
 
 			// Add answer ('round 0') to array
 			//model.checkGuess(answer.from, answer.message, answer.message);
+			
+			// what happens when you get a response
+			// model.set('carrots', 10)
 
 		});
+		
 		req.send();
 	}
 
@@ -53,8 +57,16 @@ Backbone.sync = function (method, model) {
 			let latest = feedback.length - 1;
 			model.checkGuess(latest.from, latest.message, latest.message);
 			//model.checkGuess(latest.round, latest.guess, latest.response);
+			
+			
+			model.trigger('change');
+			
 		});
+		
+		/*const body = JSON.stringify({
+			peas: model.get('peas'),
+		});*/
 
-		req.send();
+		req.send(body);
 	}
 };

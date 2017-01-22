@@ -25,11 +25,11 @@ module.exports = Backbone.View.extend({
 		
 		// trying to call the Guess() contructor in models/game.js
 		// doesn't work though
-		//let Guess = this.model.Guess();
-		//let guess = new Guess(input);
+		let Guess = this.model.Guess();
+		let guess = new Guess(input);
 		
 		// Add guess to guesses array
-    	//guesses.push(guess);
+    	guesses.push(guess);
 		
 		/*
 		// or just manually push the input/guess to guesses[]
@@ -40,49 +40,15 @@ module.exports = Backbone.View.extend({
 		*/
 		
 		// Send guess to server
-		this.model.save();
+		//this.model.save();
 		/* do i save the model (above) or the new 'guess' (below) ?
 		i was thinking this is where you send the body like an ajax req.send(body), so the save should be on 'guess'
 		*/
-		//guess.save();
+		guess.save();
 	},
 	
 	render() {
 		console.log('rendering');
-		
-		let fakeResponse = [
-			{
-				"round": 0,
-				"guess": [1, 2, 3, 4],
-				"response": [],
-			},
-			{
-				"round": 1,
-				"guess": [4, 6, 3, 6],
-				"response": [1, 0, 2, 0],
-			},
-			{
-				"round": 2,
-				"guess": [1, 7, 3, 5],
-				"response": [2, 0, 2, 0],
-			},
-		];
-		let round = 3;
-		let fake_guesses = [
-			[1, 2, 3, 4],
-			[4, 6, 3, 6],
-			[1, 7, 3, 5],
-		];
-		let fake_responses = [
-			[],
-			[1, 0, 2, 0],
-			[1, 7, 3, 5],
-		];
-		
-		fake_responses.forEach(function(response) {
-			console.log('R');
-		});
-		
 		/*let button = this.el.querySelector('#more-peas');
 		button.textContent = this.model.get('peas');*/
 	},

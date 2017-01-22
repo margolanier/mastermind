@@ -15,26 +15,6 @@ window.addEventListener('load', () => {
 
 	// Signal a new game to server
 	game.fetch();
-
-	function printColor(color) {
-		var text = "You chose... " + color.toHexString();
-		document.querySelector(".label").text(text);
-
-	}
-
-	let colorbtn = document.querySelector('#showPaletteOnly').Spectrum.spectrum({
-		color: "rgb(244, 204, 204)",
-		showPaletteOnly: true,
-		change: function (color) {
-			printColor(color);
-		},
-		palette: [
-			["rgb(0, 0, 0)", "rgb(67, 67, 67)", "rgb(102, 102, 102)",
-			"rgb(204, 204, 204)", "rgb(217, 217, 217)", "rgb(255, 255, 255)"],
-			["rgb(152, 0, 0)", "rgb(255, 0, 0)", "rgb(255, 153, 0)", "rgb(255, 255, 0)", "rgb(0, 255, 0)",
-			"rgb(0, 255, 255)", "rgb(74, 134, 232)", "rgb(0, 0, 255)", "rgb(153, 0, 255)", "rgb(255, 0, 255)"]
-		]
-	});
 });
 
 

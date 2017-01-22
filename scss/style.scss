@@ -1,0 +1,37 @@
+@import '../node_modules/foundation-sites/scss/foundation';
+
+@include foundation-global-styles;
+@include foundation-grid;
+
+$red: #E03359;
+$orange: #F18805;
+$yellow: #FFC72C;
+$green: #9BC53D;
+$blue: #65DEF1;
+$purple: #F78CFF;
+$black: #242424;
+$white: #FCF9FF;
+
+$board-color: #B4B4B4;
+
+#gameboard {
+	background-color: $board-color;
+}
+
+#sortable {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	width: 450px;
+}
+
+#sortable li {
+	margin: 3px 3px 3px 0;
+	padding: 1px;
+	float: left;
+	width: 100px;
+	height: 90px;
+	font-size: 4em;
+	text-align: center;
+}
+

@@ -1,3 +1,5 @@
+require('./spectrum');
+
 module.exports = Backbone.View.extend({
 	
 	initialize() {
@@ -51,5 +53,37 @@ module.exports = Backbone.View.extend({
 		console.log('rendering');
 		/*let button = this.el.querySelector('#more-peas');
 		button.textContent = this.model.get('peas');*/
+		
+		let rounds = this.el.querySelector('#rounds');
+		
+		// Create each 'round' element
+		for (let i=10; i>0; i--) {
+			let round = document.createElement('li');
+			round.setAttribute('id', `round${i}`);
+			rounds.appendChild(round);
+			
+			// Add 'guess' options
+			let guessOptions = document.createElement('div');
+			guessOptions.classList.add('guessOptions');
+			for (let j=0; j<4; j++) {
+				let input = document.createElement('input');
+				input.setAttribute('type', 'color');
+				guessOptions.appendChild(input);
+			}
+			round.appendChild(guessOptions);
+			
+			// Add guess 'feedback'
+			let guessFeedback = document.createElement('div');
+			guessFeedback.classList.add('guessFeedback');
+			for (let k=0; k<4; k++) {
+				let response = document.createElement('div');
+				response.setAttribute('type', 'color');
+				guessFeedback.appendChild(response);
+			}
+			round.appendChild(guessFeedback);
+			
+		}
 	},
+	
+	
 });

@@ -7,7 +7,7 @@
 		
 		<script src="http://underscorejs.org/underscore.js"></script>
 		<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+		<script src="http://bgrins.github.com/spectrum/spectrum.js"></script>
 		<script src="http://backbonejs.org/backbone.js"></script>
 		<script src="app.js"></script>
 		
@@ -16,65 +16,34 @@
 	<body>
 		<h1>Mastermind</h1>
 		
-		<input type='color' id="showPaletteOnly"/>
+		<input type='text' id="showPaletteOnly"/><br />
 		<span class='label'>Choose a color</span>
 		
+		<script>
+		function printColor(color) {
+		   var text = "You chose... " + color.toHexString();    
+		   $(".label").text(text);
+
+		}
+
+		$("#showPaletteOnly").spectrum({
+			//color: "rgb(255, 153, 0)",    
+			showPaletteOnly: true,
+			change: function(color) {
+				printColor(color);
+			},
+			palette: [
+				["red", "orange", "yellow",
+				"green"],
+				["blue","purple", "grey", "black"],
+			]
+		});
+		</script>
+		
 		<div id="gameboard">
-			
-			<ul id="rounds">
-				<li class="answer">
-					<div class="guess">
-						<div>?</div>
-						<div>?</div>
-						<div>?</div>
-						<div>?</div>
-					</div>
-				</li>
-				
-				<li class="round3">
-					<div class="guess">
-						<input type="color" class="">
-						<input type="color" class="">
-						<input type="color" class="">
-						<input type="color" class="">
-					</div>
-					<div class="response">
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-					</div>
-				</li>
-				<li class="round2">
-					<div class="guess">
-						<input type="color" class="">
-						<input type="color" class="">
-						<input type="color" class="">
-						<input type="color" class="">
-					</div>
-					<div class="response">
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-					</div>
-				</li>
-				<li class="round1">
-					<div class="guess">
-						<input type="color" class="">
-						<input type="color" class="">
-						<input type="color" class="">
-						<input type="color" class="">
-					</div>
-					<div class="response">
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-					</div>
-				</li>
-			</ul>
+			<ul id="rounds"></ul>
 			<button id="guess">Guess</button>
 		</div>
+		
 	</body>
 </html>

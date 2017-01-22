@@ -1,7 +1,6 @@
 // Import the model and view constructors
 const GameModel = require('./models/game');
 const GameView = require('./views/game');
-const Spectrum = require('spectrum-colorpicker');
 
 
 window.addEventListener('load', () => {
@@ -15,6 +14,7 @@ window.addEventListener('load', () => {
 
 	// Signal a new game to server
 	game.fetch();
+	
 });
 
 

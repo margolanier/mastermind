@@ -1,10 +1,28 @@
-require('./spectrum');
+require('./spectrum'); // colorpicker vendor plugin
 
 module.exports = Backbone.View.extend({
 	
 	initialize() {
 		this.render();
 		this.model.on('change', this.render, this);
+		
+		// Initialize jQuery plugin
+		$('.showPalette').spectrum({
+			color: '#FFFFFF',  
+			showPaletteOnly: true,
+			change: function(color) {
+				printColor(color);
+			},
+			palette: [
+				['#E03359', '#F18805', '#FFEC73', '#9BC53D'],
+				['#65DEF1','#F78CFF', '#242424', '#FFFFFF'],
+			]
+		});
+	},
+	
+	printColor(color) {
+		let text = 'You chose... ' + color.toHexString();    
+		$('.label').text(text);
 	},
 	
 	events: {
@@ -80,10 +98,9 @@ module.exports = Backbone.View.extend({
 				response.setAttribute('type', 'color');
 				guessFeedback.appendChild(response);
 			}
-			round.appendChild(guessFeedback);
 			
+			round.appendChild(guessFeedback);
 		}
 	},
-	
 	
 });

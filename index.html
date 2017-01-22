@@ -16,34 +16,24 @@
 	<body>
 		<h1>Mastermind</h1>
 		
-		<input type='text' id="showPaletteOnly"/><br />
-		<span class='label'>Choose a color</span>
-		
-		<script>
-		function printColor(color) {
-		   var text = "You chose... " + color.toHexString();    
-		   $(".label").text(text);
-
-		}
-
-		$("#showPaletteOnly").spectrum({
-			//color: "rgb(255, 153, 0)",    
-			showPaletteOnly: true,
-			change: function(color) {
-				printColor(color);
-			},
-			palette: [
-				["red", "orange", "yellow",
-				"green"],
-				["blue","purple", "grey", "black"],
-			]
-		});
-		</script>
-		
 		<div id="gameboard">
-			<ul id="rounds"></ul>
+			
+			<ul id="rounds">
+				<li class="answer">
+					<div class="guessOptions">
+						<div>?</div>
+						<div>?</div>
+						<div>?</div>
+						<div>?</div>
+					</div>
+				</li>
+			</ul>
 			<button id="guess">Guess</button>
+			
 		</div>
+		
+		<input type='text' class="showPalette"/><br />
+		<span class='label'>Choose a color</span>
 		
 	</body>
 </html>

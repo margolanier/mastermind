@@ -49,10 +49,6 @@ Backbone.sync = function(method, model) {
 			console.log(latestGuess);
 			//guesses.push(new Guess(guess));
 			
-			//console.log('this = ');
-			//console.log(this);
-			//this.gameboard.alertMe();
-
 			//let guess = [1, 2, 3, 4];
 			//guesses.push(new Guess(guess));
 

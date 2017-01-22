@@ -20,9 +20,7 @@ module.exports = Backbone.View.extend({
 		
 		//guesses.push(['hello']);
 
-    	//this.model.save(); // game.save()
-		
-		this.model.fetch();
+    	this.model.save(); // game.save()
 	},
 	
 	render() {

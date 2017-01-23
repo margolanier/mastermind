@@ -7,7 +7,11 @@ module.exports = Backbone.View.extend({
 		this.render();
 		this.model.on('change', this.render, this);
 		
-		// Initialize jQuery plugin
+		// initialize jQuery plugin
+		this.model.on('change', this.showPalette, this);
+	},
+	
+	showPalette() {
 		$('.showPalette').spectrum({
 			color: '#FFFFFF',  
 			showPaletteOnly: true,
@@ -70,7 +74,8 @@ module.exports = Backbone.View.extend({
 			guessOptions.classList.add('guessOptions');
 			for (let j=0; j<4; j++) {
 				let input = document.createElement('input');
-				input.setAttribute('type', 'color');
+				input.setAttribute('type', 'text');
+				input.classList.add('showPalette');
 				guessOptions.appendChild(input);
 			}
 			round.appendChild(guessOptions);

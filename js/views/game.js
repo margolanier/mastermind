@@ -1,4 +1,5 @@
-require('./spectrum'); // colorpicker vendor plugin
+require('./spectrum'); // colorpicker plugin
+let currentRound = 0;
 
 module.exports = Backbone.View.extend({
 	
@@ -26,51 +27,35 @@ module.exports = Backbone.View.extend({
 	},
 	
 	events: {
-		'click #guess' : 'makeGuess',
+		'click #guess' : 'guess',
+		'click #reset' : 'newGame',
 	},
 	
-	makeGuess() {
+	guess(currentRound) {
 		console.log('make new guess');
+		currentRound++;
+		//let target = '"#round' + currentRound + ' input"';
+		//let input = document.querySelectorAll(target); // li.round1 input
+		let options = document.querySelectorAll('#round1 input');
 		
-		const guesses = this.model.get('guesses');
-		console.log(guesses);
+		// Get user input (guess) for current round
+		let newGuess = [];
+		options.forEach(function(option) {
+			newGuess.push(option.value);
+		});
+		// newGuess = ['#E03359', '#F18805', '#F18805', '#9BC53D'];
+		console.log(newGuess);
 		
-		// Get user input and send new guess to server
-		let input = {
-			// JSON stringify?
-			// do i need to specify content type like in button demo?
-			from: 'margo', // round: 1,
-			message: 'it works. cool.' // guesses: []
-		};
-		
-		// trying to call the Guess() contructor in models/game.js
-		// doesn't work though
-		let Guess = this.model.Guess();
-		let guess = new Guess(input);
-		
-		// Add guess to guesses array
-    	guesses.push(guess);
-		
-		/*
-		// or just manually push the input/guess to guesses[]
-		// without using Game() constructor?
-		let newGuess = input.message;
-		guesses.push(newGuess);
-		console.log(guesses);
-		*/
-		
-		// Send guess to server
-		//this.model.save();
-		/* do i save the model (above) or the new 'guess' (below) ?
-		i was thinking this is where you send the body like an ajax req.send(body), so the save should be on 'guess'
-		*/
-		guess.save();
+		this.model.sendGuess(newGuess);
+	},
+	
+	newGame() {
+		this.model.resetGame();
 	},
 	
 	render() {
 		console.log('rendering');
-		/*let button = this.el.querySelector('#more-peas');
-		button.textContent = this.model.get('peas');*/
+		// let button = this.el.querySelector('#guess');
 		
 		let rounds = this.el.querySelector('#rounds');
 		
@@ -80,7 +65,7 @@ module.exports = Backbone.View.extend({
 			round.setAttribute('id', `round${i}`);
 			rounds.appendChild(round);
 			
-			// Add 'guess' options
+			// Add 'guess options' pegs
 			let guessOptions = document.createElement('div');
 			guessOptions.classList.add('guessOptions');
 			for (let j=0; j<4; j++) {
@@ -90,7 +75,7 @@ module.exports = Backbone.View.extend({
 			}
 			round.appendChild(guessOptions);
 			
-			// Add guess 'feedback'
+			// Add 'guess feedback' pegs
 			let guessFeedback = document.createElement('div');
 			guessFeedback.classList.add('guessFeedback');
 			for (let k=0; k<4; k++) {

@@ -1,13 +1,11 @@
-module.exports = Backbone.Model.extend({
-	defaults: {
-		round: 0, // chats api = 'from'
-		newGuess: null,
-        guesses: [],
-		feedback: [], // chats api = 'message'
-    },
+const RoundModel = require('./round');
+
+module.exports = Backbone.Collection.extend({
+	model: RoundModel,
 	
-	// Send user guess to server for feedback
-	sendGuess(guess) {
+	// After user makes a guess for current round,
+	// create new Round model to send to server
+	postGuess(newGuess) {
 		
 		let color_num_pairs = [
 			[1, 'red', '#E03359'],
@@ -24,7 +22,7 @@ module.exports = Backbone.Model.extend({
 		let numberGuess = [];
 		
 		// Iterate over all four color guesses
-		for (let i=0; i<guess.length; i++) { 
+		for (let i=0; i<newGuess.length; i++) { 
 			// Get the color's number equivalent
 			for (let j=0; j<color_num_pairs.length; j++) {
 				if (color_num_pairs[j].indexOf('#F78CFF') != -1) {
@@ -33,83 +31,24 @@ module.exports = Backbone.Model.extend({
 			}
 		}
 		
-		// Add guess to guesses array
-		const guesses = this.get('guesses');
-    	guesses.push(numberGuess);
+		// Create Round model
+		const currentGuess = new RoundModel();
+		currentGuess.set('guess', numberGuess);
 		
-		// Open HTTP request
-		this.save();
+		// Send model as POST request
+		currentGuess.collection = this;
+		currentGuess.save();
 	},
 	
-	// probably won't use this constructor
-	Guess(guess) {
-		this.guess = guess;
-		this.exact = null; // right color, right position
-		this.close = null; // right color, wrong position
-
-		return this;
-	},
-	
-	resetGame() {
-		this.set('round', 0);
-		this.set('newGuess', null);
-		//this.set('guesses': []);
-		//this.set('feedback': []);
+	// After response comes back from server,
+	// parse through all chats and create model for each
+	parseFeedback(response) {
+		const round = new RoundModel();
+		round.set('round', response.round);
+		round.set('guess', response.guess);
+		round.set('feedback', response.feedback);
 		
-		// Trigger 'new game' on server
-		this.fetch();
-		// this.save();
+		this.add(round);
 	},
 	
 });
-
-
-// 'Sync' is called when you fetch/save the game model
-Backbone.sync = function (method, model) {
-	
-	if (method === 'create' || method === 'update') {
-		const req = new XMLHttpRequest();
-		req.open('POST', 'http://api.queencityiron.com/chats');
-		req.addEventListener('load', function () {
-			const response = JSON.parse(req.responseText);
-			const feedback = response.chats; // temp url
-			
-			console.log('posting');
-			console.log(feedback);
-			
-			// Only need to check the lastest round (last object in array)
-			let latest = feedback.length - 1;
-			
-			// Update model round and add latest response to feedback array
-			model.set('round', round);
-			model.set('feedback', model.get('feedback').push(latest.response));
-
-			// Manually trigger view re-render
-			model.trigger('change');
-		});
-		
-		const body = JSON.stringify({
-			//guess: model.get('guess'),
-			from: 'margo',
-			message: 'cool, it is working',
-		});
-		
-		req.send(body);
-	}
-	
-	
-	if (method === 'read') {
-		const req = new XMLHttpRequest();
-		// probably to /new-game
-		req.open('GET', 'http://api.queencityiron.com/chats');
-		req.addEventListener('load', function () {
-			/*
-			 * Don't need to do anything here;
-			 * just signals server to generate new game
-			 */
-			model.trigger('change');
-		});
-		
-		req.send();
-	}
-};

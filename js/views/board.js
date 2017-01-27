@@ -4,8 +4,8 @@ let currentRound = 0;
 module.exports = Backbone.View.extend({
 	
 	initialize() {
-		this.render();
 		this.model.on('change', this.render, this);
+		this.model.on('remove', this.render, this);
 		
 		// initialize jQuery plugin
 		this.model.on('change', this.showPalette, this);
@@ -31,30 +31,22 @@ module.exports = Backbone.View.extend({
 	},
 	
 	events: {
-		'click #guess' : 'guess',
+		'click #guess' : 'createGuess',
 		'click #reset' : 'newGame',
 	},
 	
-	guess(currentRound) {
-		console.log('make new guess');
-		currentRound++;
-		//let target = '"#round' + currentRound + ' input"';
-		//let input = document.querySelectorAll(target); // li.round1 input
+	createGuess() {
 		let options = document.querySelectorAll('#round1 input');
 		
 		// Get user input (guess) for current round
 		let newGuess = [];
-		options.forEach(function(option) {
+		/*options.forEach(function(option) {
 			newGuess.push(option.value);
-		});
-		// newGuess = ['#E03359', '#F18805', '#F18805', '#9BC53D'];
+		});*/
+		newGuess = ['#E03359', '#F18805', '#F18805', '#9BC53D'];
 		console.log(newGuess);
 		
-		this.model.sendGuess(newGuess);
-	},
-	
-	newGame() {
-		this.model.resetGame();
+		this.model.postGuess(newGuess);
 	},
 	
 	render() {

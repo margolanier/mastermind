@@ -6,7 +6,7 @@ require('./ajax.js');
 window.addEventListener('load', () => {
 	
 	// Signal a new game to server to reset the answer
-	const reset = GameStart.post('https://mysterious-wave-13048.herokuapp.com/new-game', {});
+	//const reset = GameStart.post('https://mysterious-wave-13048.herokuapp.com/new-game', {});
 	
 	// Define the game model and view
 	const game = new GameModel();
@@ -15,4 +15,6 @@ window.addEventListener('load', () => {
 		el: document.querySelector('body'),
 		model: game,
 	});
+	
+	view.render();
 });

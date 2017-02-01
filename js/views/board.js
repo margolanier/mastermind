@@ -1,4 +1,4 @@
-require('./spectrum'); // colorpicker plugin
+require('./spectrum'); // jQuery colorpicker plugin
 let currentRound = 0;
 
 module.exports = Backbone.View.extend({
@@ -6,9 +6,6 @@ module.exports = Backbone.View.extend({
 	initialize() {
 		this.model.on('change', this.render, this);
 		this.model.on('remove', this.render, this);
-		
-		// initialize jQuery plugin
-		this.model.on('change', this.showPalette, this);
 	},
 	
 	showPalette() {
@@ -82,6 +79,9 @@ module.exports = Backbone.View.extend({
 			}
 			
 			round.appendChild(guessFeedback);
+			
+			// initialize color options
+			this.showPalette();
 		}
 	},
 	

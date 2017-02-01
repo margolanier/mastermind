@@ -44,11 +44,12 @@ module.exports = Backbone.Collection.extend({
 	// parse through all chats and create model for each
 	parseFeedback(response) {
 		const round = new RoundModel();
-		round.set('round', response.round);
-		round.set('guess', response.guess);
-		round.set('feedback', response.feedback);
+		round.set('round', response.id);
+		round.set('guess', response.guesses);
+		round.set('feedback', response.checks);
 		
 		this.add(round);
+		console.log(round);
 	},
 	
 });
